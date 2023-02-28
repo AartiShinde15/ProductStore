@@ -21,7 +21,6 @@
 <table class="table table-bordered table-striped" style="width:100%;">
     <thead>
         <tr>
-        <tr>
             <th>
                 Product Name
             </th>
@@ -38,13 +37,11 @@
                 Rating
             </th>
         </tr>
-        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.products)
         {
             <tr>
-
                 <td width="10%">@item.Name</td>
                 <td width="20%"><img src="@item.ImageUrl" id="imgSrc" width="100" height="100" /></td>
                 <td width="10%">@item.Price</td>
