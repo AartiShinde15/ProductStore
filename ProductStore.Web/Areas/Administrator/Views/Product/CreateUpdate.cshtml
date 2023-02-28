@@ -1,0 +1,71 @@
+﻿@model ProductStore.DataAccess.ViewModels.ProductVM
+
+<form method="post" asp-action="CreateUpdate" enctype="multipart/form-data">
+    <input type="hidden" asp-for="product.Id" />
+    <input type="hidden" id="hdnImageUrl" name="hdnImageUrl" asp-for="product.ImageUrl" />
+    <input type="hidden" Id="Rating" name="Rating" asp-for="product.Rating" />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">@((Model.products == null || Model.product.Id == 0) ? "Create" : "Update") Product</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="product.Name"></label>
+            <input asp-for="product.Name" class="form-control" />
+            <span asp-validation-for="product.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3" id="imageDiv">
+            <label asp-for="product.ImageUrl"></label>
+            <input asp-for="product.ImageUrl" type="file" id="ImageFile" name="file" class="form-select"
+                   accept="image/png, image/jpg, image/jpeg" onchange="changeImage(event)" />
+            <img src="@Model.product.ImageUrl" id="imgSrc" width="100" height="100" />
+
+            <span asp-validation-for="product.ImageUrl" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="product.Price"></label>
+            <input asp-for="product.Price" class="form-control" />
+            <span asp-validation-for="product.Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="product.CategoryId"></label>
+            <select asp-for="product.CategoryId" asp-items="@Model.categories" class="form-control">
+            </select>
+            <span asp-validation-for="product.CategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="product.Rating"></label>
+            <div class="rating">
+                <input type="radio" id="star5" asp-for="product.Rating" value="5" onclick="handleClick(this);">
+                <label for="star5" title="Great">5 stars</label>
+                <input type="radio" id="star4" asp-for="product.Rating" value="4" onclick="handleClick(this);">
+                <label for="star4" title="Good">4 stars</label>
+                <input type="radio" id="star3" asp-for="product.Rating" value="3" onclick="handleClick(this);">
+                <label for="star3" title="Okay">3 stars</label>
+                <input type="radio" id="star2" asp-for="product.Rating" value="2" onclick="handleClick(this);">
+                <label for="star2" title="Bad">2 stars</label>
+                <input type="radio" id="star1" asp-for="product.Rating" value="1" onclick="handleClick(this);">
+                <label for="star1" title="Very Bad">1 star</label>
+            </div>
+            <span asp-validation-for="product.Rating" class="text-danger"></span>
+        </div>
+        @if (Model.products == null || Model.product.Id == 0)
+        {
+            <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary" style="width:150px;">Update</button>
+        }
+
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px;">Back to List</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+<script src="~/js/product.js"></script>
