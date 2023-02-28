@@ -25,22 +25,6 @@ namespace ProductStore.Web.Areas.EndUser.Controllers
             return View(productVM);
         }
 
-        public IActionResult IndexSearch(string productName)
-        {
-            if (string.IsNullOrEmpty(productName))
-            {
-                ProductVM productVM = new ProductVM();
-                productVM.products = _unitofwork.Product.GetAll();
-                productVM.categories = convertCategories();
-                return View(productVM);
-            }
-            else
-            {
-                ProductVM productVM = new ProductVM();
-                productVM.products = _unitofwork.Product.GetAll(x => x.Name.Contains(productName));
-                return View(productVM);
-            }
-        }
         public IActionResult Privacy()
         {
             return View();

@@ -40,3 +40,8 @@ function handleClick1(ref, cnt) {
         $('#Rating5').value = currentValue
     }
 }
+
+
+$(document).ready(function () {
+    $('#tblList').DataTable();
+});
